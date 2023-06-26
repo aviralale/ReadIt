@@ -1,0 +1,27 @@
+.about-desc-aside::first-letter {
+    color: red;
+    font-size: 3rem;
+    float: left;
+    line-height: 1;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    font-family: 'Bacasime Antique', serif;
+}
+
+.about-header-aside{
+    font-family: 'Bacasime Antique', serif;
+    font-weight: bold;
+    font-size: 2rem;
+    color: white;
+}
+
+h1.heading-post{
+    font-size: 2.7rem;
+    font-family: 'Bacasime Antique', serif;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.555);
+}
+
+ol.socials-aside>li>a{
+    text-decoration: none;
+    color: white;
+}
