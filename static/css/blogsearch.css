@@ -1,0 +1,13 @@
+/* Thumbnail FIxing */
+
+.thumbnail-wrapper {
+    width: 200px;
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .thumbnail-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }

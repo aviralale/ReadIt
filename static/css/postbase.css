@@ -21,7 +21,39 @@ h1.heading-post{
     border-bottom: 1px solid rgba(255, 255, 255, 0.555);
 }
 
-ol.socials-aside>li>a{
-    text-decoration: none;
-    color: white;
+span#commentTimeStamp{
+    font-size: 0.8rem !important;
 }
+span#replyTimeStamp{
+    font-size: 0.8rem !important;
+}
+
+button.replyBtn,button.replyBtn:hover,
+button.replyBtn:active,button.replyBtn:focus
+{
+    outline: none !important;
+    border: none !important;
+    background: transparent !important;
+    text-decoration: underline !important;
+}
+
+div.commentDisplaycontainer{
+    border: 1px solid rgb(68,73,78);
+    padding: 1rem;
+    border-radius: 22px;
+}
+
+
+
+  .accordion-button.collapsed:hover {
+    background-color: rgb(43,48,53);
+  }
+
+  .accordion-button:not(.collapsed) {
+    background-color: rgb(43,48,53);
+  }
+
+  .accordion-button:not(.collapsed):hover {
+    background-color: rgb(43,48,53);
+  }
+  

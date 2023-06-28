@@ -1,45 +1,23 @@
-{%load static%}
-<!doctype html>
-<html lang="en" data-bs-theme="dark">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> {% block title %}
-        
-        {% endblock title %} | ReadIt</title>
-
-        <link rel="stylesheet" href="{%static 'css/postbase.css'%}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bacasime+Antique&family=Poppins&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.0/css/all.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
-  </head>
-    
-<body>
-      <!--Main Navigation-->
-  <header>
-    <!-- Intro settings -->
-    <style>
-      #intro {
-        /* Margin to fix overlapping fixed navbar */
-        margin-top: 58px;
-      }
-
-      @media (max-width: 991px) {
-        #intro {
-          /* Margin to fix overlapping fixed navbar */
-          margin-top: 45px;
-        }
-      }
-    </style>
-
-    <!-- Navbar -->
-
+{% extends 'nav.html' %}
+{% load static %}
+{% load humanize %}
+{% load get_dict %}
+{% block title %} {{post.title}} {% endblock title %}
+{% block css_links %}
+<link rel="stylesheet" href="{%static 'css/blogpost.css'%}">
+<link rel="stylesheet" href="{%static 'css/postbase.css'%}">
+{% endblock css_links %}
     <!-- Jumbotron -->
+    {% block body %}
+    {% block main %}
+    <nav aria-label="breadcrumb" class='container'>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/blog">Blog</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ post.title}}</li>
+      </ol>
+    </nav>
     <div id="intro" class="p-5 text-center">
-      <h1 class="mb-0 heading-post h4">This is a long title of the article</h1>
+      <h1 class="mb-0 heading-post h4">{{post.title}}</h1>
     </div>
     <!-- Jumbotron -->
   </header>
@@ -54,17 +32,19 @@
         <div class="col-md-8 mb-4">
           <!--Section: Post data-mdb-->
           <section class="border-bottom mb-4">
-            <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg"
+            <div class="thumbnail-wrapper container-fluid">
+            <img src="{{post.thumbnail.url}}"
               class="img-fluid shadow-2-strong rounded-5 mb-4" alt="" />
-
-            <div class="row align-items-center mb-4">
+            </div>
+            <div class="row align-items-center my-4">
               <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (23).jpg" class="rounded-5 shadow-1-strong me-2"
-                  height="35" alt="" loading="lazy" />
-                <span> Published <u>15.07.2020</u> by</span>
-                <a href="" class="text-dark">Anna</a>
+                <img src="{%static 'media/img/logo.png'%}" class="authorPhoto shadow-1-strong me-2"
+                  width="35" alt="" loading="lazy" />
+                <span> Published <u>{{post.timeStamp}}</u> by</span>
+                <a href="{%url 'about' %}" class="text-white">{{post.author}}</a>
+                <p class="postViews mx-4"> <span id="viewsCount" class="viewsCount"><strong>{{post.views}}</strong></span> views</p>
               </div>
-
+                
               <div class="col-lg-6 text-center text-lg-end">
                 <button type="button" class="btn btn-outline-light px-3 me-1">
                   <i class="fab fa-facebook-f"></i>
@@ -75,9 +55,9 @@
                 <button type="button" class="btn btn-outline-light px-3 me-1">
                   <i class="fab fa-linkedin"></i>
                 </button>
-                <button type="button" class="btn btn-outline-light px-3 me-1">
+                <a href="#comment"><button type="button" class="btn btn-outline-light px-3 me-1">
                   <i class="fas fa-comments"></i>
-                </button>
+                </button></a>
               </div>
             </div>
           </section>
@@ -86,42 +66,11 @@
           <!--Section: Text-->
           <section>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio sapiente molestias
-              consectetur. Fuga nulla officia error placeat veniam, officiis rerum laboriosam
-              ullam molestiae magni velit laborum itaque minima doloribus eligendi! Lorem ipsum,
-              dolor sit amet consectetur adipisicing elit. Optio sapiente molestias consectetur.
-              Fuga nulla officia error placeat veniam, officiis rerum laboriosam ullam molestiae
-              magni velit laborum itaque minima doloribus eligendi!
+              {{post.content|safe}}
             </p>
-
-            <p><strong>Optio sapiente molestias consectetur?</strong></p>
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum architecto ex ab aut
-              tempora officia libero praesentium, sint id magnam eius natus unde blanditiis. Autem
-              adipisci totam sit consequuntur eligendi.
-            </p>
-
-            <p class="note note-light">
-              <strong>Note:</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Optio odit consequatur porro sequi ab distinctio modi. Rerum cum dolores sint,
-              adipisci ad veritatis laborum eaque illum saepe mollitia ut voluptatum.
-            </p>
-
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, libero repellat
-              molestiae aperiam laborum aliquid atque magni nostrum, inventore perspiciatis
-              possimus quia incidunt maiores molestias eaque nam commodi! Magnam, labore.
-            </p>
-
             <img src="https://mdbootstrap.com/img/new/slides/041.jpg" class="img-fluid shadow-1-strong rounded-5 mb-4"
               alt="" />
 
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, temporibus nulla
-              voluptatibus accusantium sapiente doloremque. Doloribus ratione laboriosam culpa. Ab
-              officiis quidem, debitis nostrum in accusantium dolore veritatis eius est?
-            </p>
           </section>
           <!--Section: Text-->
 
@@ -138,29 +87,27 @@
             <button type="button" class="btn btn-outline-light me-1">
               <i class="fab fa-linkedin"></i>
             </button>
-            <button type="button" class="btn btn-outline-light me-1">
+            <a href="#comment"><button type="button" class="btn btn-outline-light me-1">
               <i class="fas fa-comments me-2"></i>Add comment
-            </button>
+            </button></a>
           </section>
           <!--Section: Share buttons-->
 
           <!--Section: Author-->
-          <section class="border-bottom mb-4 pb-4">
+          <section class="border-bottom my-4 pb-4">
             <div class="row">
               <div class="col-3">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(23).jpg"
-                  class="img-fluid shadow-1-strong rounded-5" alt="" />
+                <img src="{%static 'media/img/logo.png'%}"
+                  class="img-fluid" alt="" />
               </div>
 
               <div class="col-9">
-                <p class="mb-2"><strong>Anna Maria Doe</strong></p>
+                <p class="mb-2"><strong>{{post.author}}</strong></p>
                 <a href="" class="text-dark"><i class="fab fa-facebook-f me-1"></i></a>
                 <a href="" class="text-dark"><i class="fab fa-twitter me-1"></i></a>
                 <a href="" class="text-dark"><i class="fab fa-linkedin me-1"></i></a>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio est ab iure
-                  inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
-                  Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
+                  As a ReadIt author, I share my thoughts and stories with a passionate community of readers. I value the power of words and strive to create meaningful reading experiences. Being part of ReadIt means embracing the exchange of ideas and leaving a lasting impact through storytelling. It's a platform that celebrates literature and fosters a vibrant community of readers and authors.
                 </p>
               </div>
             </div>
@@ -169,90 +116,129 @@
 
           <!--Section: Comments-->
           <section class="border-bottom mb-3">
-            <p class="text-center"><strong>Comments: 3</strong></p>
+            <p class="text-center"><strong>Comments: <span class="text-white" >{{comments.count}}</span> </strong></p>
 
+            {% for comment in comments %}
             <!-- Comment -->
-            <div class="row mb-4">
+            <div class="row  mb-4 commentDisplaycontainer">
               <div class="col-2">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(24).jpg"
+                <img src="{%static 'media/img/user.png'%}"
                   class="img-fluid shadow-1-strong rounded-5" alt="" />
               </div>
 
-              <div class="col-10">
-                <p class="mb-2"><strong>Marta Dolores</strong></p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio est ab iure
-                  inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
-                  Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
+              <div class="col-10 commentDisplay rounded-5 border-dark-subtle">
+                <p class="mb-2"><strong class="text-white">@{{comment.user.username}}</strong> <br> <span class="text-small" id="commentTimeStamp">{{comment.timeStamp | naturaltime}}</span> </p>
+                <p class="text-white">
+                  {{comment.comment}}
                 </p>
+                  
+                <div class="reply mx-0">
+                {% if user.is_authenticated %}
+                  <a href="#replyComment{{comment.sno}}"><button class="btn btn-primary btn-sm replyBtn" type="button" data-bs-toggle="collapse" data-bs-target="#replyBox{{comment.sno}}" aria-expanded="false" aria-controls="collapseExample">
+                    
+                    <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-reply"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"
+                          /></svg>
+                    Reply
+                  </button></a>
+                
+                <div class="collapse" id="replyBox{{comment.sno}}">
+                  <div class="card card-body">
+                    <form action="/blog/postcomment" method="post">
+                      {% csrf_token %}
+                    <div class="input-group col-4 mb-3">
+                      <span class="input-group-text"
+                        ><svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-reply"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.74 8.74 0 0 0-1.921-.306 7.404 7.404 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254a.503.503 0 0 0-.042-.028.147.147 0 0 1 0-.252.499.499 0 0 0 .042-.028l3.984-2.933zM7.8 10.386c.068 0 .143.003.223.006.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96v-.667z"
+                          /></svg
+                      ></span>
+                      <textarea
+                        class="form-control"
+                        name="comment"
+                        id="replyComment{{comment.sno}}"
+                      ></textarea>
+                      <input type="hidden" name="parentSN" value="{{comment.sno}}">
+                    </div>
+                    <input type="hidden" name="postSN" value="{{post.sno}}">
+                    <button type="submit" class="btn btn-outline-light">Reply</button>
+                  </form>
+                  </div>
+                </div>
+              {% else %}
+
+            {% endif %}
+            
+                <div class="replies my-4 rounded-1">
+                  <div class="accordion col-12" id="commentToggle{{comment.sno}}">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#togglereply{{comment.sno}}" aria-expanded="false" aria-controls="collapseTwo">
+                          Toggle Replies
+                        </button>
+                      </h2>
+                      <div id="togglereply{{comment.sno}}" class="accordion-collapse collapse" data-bs-parent="#commentToggle{{comment.sno}}">
+                        <div class="accordion-body">
+                          {% for reply in replyDict|get_val:comment.sno %}
+                  <div class="row my-4 rounded-5">
+                    <div class="col-2">
+                      <img src="{%static 'media/img/user.png'%}"
+                        class="img-fluid shadow-1-strong rounded-5" alt="" />
+                    </div>
+                    <div class="col-10 commentDisplaycontainer">
+                    <div class="col-10 commentDisplay">
+                      <p class="my-0"><strong class="text-white">@{{reply.user.username}}</strong> <br> <span class="text-small" id="replyTimeStamp">{{reply.timeStamp | naturaltime}}</span> </p>
+                      <p class="text-white">
+                    {{reply.comment}}
+                      </p>
+                    </div>
+                  <br>
+                </div>
               </div>
+              {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
             </div>
-
-            <!-- Comment -->
-            <div class="row mb-4">
-              <div class="col-2">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(25).jpg"
-                  class="img-fluid shadow-1-strong rounded-5" alt="" />
-              </div>
-
-              <div class="col-10">
-                <p class="mb-2"><strong>Valeria Groove</strong></p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio est ab iure
-                  inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
-                  Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
-                </p>
-              </div>
             </div>
-
-            <!-- Comment -->
-            <div class="row mb-4">
-              <div class="col-2">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg"
-                  class="img-fluid shadow-1-strong rounded-5" alt="" />
-              </div>
-
-              <div class="col-10">
-                <p class="mb-2"><strong>Antonia Velez</strong></p>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio est ab iure
-                  inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
-                  Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
-                </p>
-              </div>
             </div>
+            </div>
+            <hr>
+            {% endfor %}
           </section>
           <!--Section: Comments-->
 
-          <!--Section: Reply-->
+          <!--Section: Comment-->
           <section>
-            <p class="text-center"><strong>Leave a reply</strong></p>
+            <p class="text-center"><strong>Leave a comment</strong></p>
+            {% if user.is_authenticated %}
 
-            <form>
-              <!-- Name input -->
+            <form method = "post" action="/blog/postcomment">
+              {% csrf_token %}
+              <input type="hidden" name="postSN" value="{{post.sno}}">
+              <input type="hidden" name="parentSN" value="">
+              <!-- Comment input -->
               <div class="form-outline mb-4">
-                <input type="text" id="form4Example1" class="form-control" />
-                <label class="form-label" for="form4Example1">Name</label>
-              </div>
-
-              <!-- Email input -->
-              <div class="form-outline mb-4">
-                <input type="email" id="form4Example2" class="form-control" />
-                <label class="form-label" for="form4Example2">Email address</label>
-              </div>
-
-              <!-- Message input -->
-              <div class="form-outline mb-4">
-                <textarea class="form-control" id="form4Example3" rows="4"></textarea>
-                <label class="form-label" for="form4Example3">Text</label>
-              </div>
-
-              <!-- Checkbox -->
-              <div class="form-check d-flex justify-content-center mb-4">
-                <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
-                <label class="form-check-label" for="form4Example4">
-                  Send me a copy of this comment
-                </label>
+                <input type="hidden" name="parentSN" value="">
+                <textarea class="form-control" name="comment" id="comment" rows="4" placeholder="Enter your comment here..."></textarea>
+                <label class="form-label" for="comment">Comment as @{{request.user}}</label>
               </div>
 
               <!-- Submit button -->
@@ -260,8 +246,11 @@
                 Publish
               </button>
             </form>
+            {% else %}
+            <p>Sign up or Login to Comment</p>
+            {% endif %}
           </section>
-          <!--Section: Reply-->
+          <!--Section: Comment-->
         </div>
         <!--Grid column-->
 
@@ -294,7 +283,7 @@
     </div>
   </main>
   <!--Main layout-->
-
+</div>
   <!--Footer-->
   <footer class=" text-lg-start">
     <div class="py-4 text-center">
@@ -330,10 +319,12 @@
     </div>
   </footer>
   <!--Footer-->
-</body>
-    
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="{%static 'js/main.js'%}"></script>
-  </body>
-</html>
+    {% endblock main %}
+    {% endblock body %}
+    {% block js %}
+    <script>
+      var commentCount = document.getElementByClassName('commentDisplay').length;
+      console.log("Count" + commentCount)
+    </script>
+ <script src="{%static 'js/blogPost.js'%}"></script>
+    {% endblock js %}

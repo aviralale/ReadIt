@@ -1,0 +1,226 @@
+{% load static %}
+<! DOCTYPE html >
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %} {% endblock title %} | ReadIt</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.2.0/css/all.css"
+    />
+    {% block css_links %}{% endblock css_links %}
+    <link rel="stylesheet" href="{%static 'css/base.css'%}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="border-bottom lh-1 py-3 px-4">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+          {% block navmainleft %}
+          
+          <a class="link-secondary" href="#">Subscribe</a>
+
+          {% endblock navmainleft %}
+        </div>
+        <div class="col-4 text-center">
+          <a
+            class="blog-header-logo text-body-emphasis text-decoration-none"
+            href="/"
+            ><img src="{%static 'media/img/logo.png'%}" alt="" width="100px"
+          /></a>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+
+          {% if user.is_authenticated %}
+          <div class="flex-shrink-0 dropdown">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{% static 'media/img/user.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small shadow" style="">
+              <li><a class="dropdown-item text-primary" href="#">@{{request.user}}</a></li>
+              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+            </ul>
+          </div>
+          {% else %}
+          <!-- Button trigger for SIGNUP modal -->
+<button type="button" class="btn signup-button-nav" id="signupBtnNav" data-bs-toggle="modal" data-bs-target="#signupModal">
+  Signup
+</button>
+
+<span class="text-secondary">/</span>
+   <!-- Button trigger for Login modal -->
+  <button type="button" class="btn login-button-nav mx-2" id="loginBtnNav" data-bs-toggle="modal" data-bs-target="#loginModal">
+    Login
+  </button>
+
+  {% endif %}
+<!-- SIGNUP Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="signupModalTitle">Sign up</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" action='/signup' enctype="multipart/form-data" method='post'>
+          {% csrf_token %}
+          <div class="col-12">
+            <div class="row">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">First name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Last name <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+          </div>
+            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+            <div class="input-group has-validation">
+              <span class="input-group-text">@</span>
+              <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+            <div class="invalid-feedback">
+                Your username is required.
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="image" class="form-label">Profile Image:</label>
+              <input type="file" class="form-control" id="profile_pic" name="profile_pic">
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+            <div class="invalid-feedback">
+              Please enter a valid email address.
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="phone" class="form-label">Phone No. <span class="text-body-secondary">(Optional)</span></label>
+            <input type="tel" class="form-control" id="phone" name="phone">
+          </div>
+          <div class="col-md-6">
+            <label for="password1" class="form-label">Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password1" name="password1" required>
+          </div>
+          <div class="col-md-6">
+            <label for="password2" class="form-label">Re-enter Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="password2" name="password2" required>
+            <div class="invalid-feedback">
+              Passwords didn't match. 
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="gridCheck">
+              <label class="form-check-label" for="gridCheck">
+                By clicking Sign Up, I agree to all <a href="">Terms and Conditions</a>
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer col-12">
+            <button type="submit" class="btn btn-outline-primary">Sign Up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+        
+        <!-- LOGIN Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="loginModalTitle">Login</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form class="row g-3" action='/login' method='post'>
+                  {% csrf_token %}
+                  <div class="col-12">
+                    <div class="row">
+                    <label for="loginUsername" class="form-label">Username <span class="text-danger">*</span></label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text">@</span>
+                      <input type="text" class="form-control" id="loginUsername" name="loginUsername" placeholder="username" required>
+                    <div class="invalid-feedback">
+                        Your username is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label for="loginPassword" class="form-label">Password <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" id="loginPassword" name="loginPassword" required>
+                  </div>
+                  </div>
+                  <div class="modal-footer col-12">
+                    <button type="submit" class="btn btn-outline-primary">Log in</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+    </header>
+    
+    {% block secondNav %}
+    
+    {% endblock secondNav %}
+    {% if messages %}
+    {% for message in messages %}
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div class="toast-container top-4 end-0 position-fixed p-3">
+    
+        <div class="toast fade show text-white bg-{{message.tags}}" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Read<span class="text-danger">It.</span></strong>
+            <small class="text-body-secondary" id="timer">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            {{message}}
+          </div>
+        </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+    {% block body %}
+    
+    <main>
+      {% block main %}{% endblock main %}
+    </main>
+    
+    {% endblock body %}
+
+    
+
+    
+  </body>
+  {% block js %}
+  
+  {% endblock js %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <script src="{%static 'js/main.js'%}"></script>
+</html>

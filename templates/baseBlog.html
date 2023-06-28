@@ -1,0 +1,49 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block css_links %}
+<link rel="stylesheet" href="{%static 'css/blogHome.css'%}" />
+{% endblock css_links %}
+
+{% block navmainleft %}
+          
+          <a class="link-secondary" href="/">Back to Home</a>
+
+          {% endblock navmainleft %}
+  {% block secondNav %}
+    <div class="nav-scroller py-1 px-4 mb-3 border-bottom">
+      <nav class="nav nav-underline justify-content-between">
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'World' %}active{% endif %}" href="{% url 'blog:category_world' %}">World</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'U.S.' %}active{% endif %}" href="{% url 'blog:category_us' %}">U.S.</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Technology' %}active{% endif %}" href="{% url 'blog:category_technology' %}">Technology</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Design' %}active{% endif %}" href="{% url 'blog:category_design' %}">Design</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Culture' %}active{% endif %}" href="{% url 'blog:category_culture' %}">Culture</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Business' %}active{% endif %}" href="{% url 'blog:category_business' %}">Business</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Politics' %}active{% endif %}" href="{% url 'blog:category_politics' %}">Politics</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Opinion' %}active{% endif %}" href="{% url 'blog:category_opinion' %}">Opinion</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Science' %}active{% endif %}" href="{% url 'blog:category_science' %}">Science</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Health' %}active{% endif %}" href="{% url 'blog:category_health' %}">Health</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Style' %}active{% endif %}" href="{% url 'blog:category_style' %}">Style</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Travel' %}active{% endif %}" href="{% url 'blog:category_travel' %}">Travel</a>
+      </nav>
+    </div>
+  {% endblock secondNav %}
+    {% block body %} 
+    <main>
+    {% block main %} 
+
+    {% endblock main %} 
+    </main>
+    {% endblock body %}
+  
+  </body>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+  crossorigin="anonymous"
+></script>
+{% block js %}
+
+{% endblock js %}
+<script src="{%static 'js/main.js'%}"></script>
+</html>
