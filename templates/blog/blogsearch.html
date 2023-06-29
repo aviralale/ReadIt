@@ -41,31 +41,36 @@
               </div>
             </form>
             {% if allPosts|length < 1 %}
+            <div class="d-flex justify-content-center">
             <h3 class="text-white no-search-results">No results for: <span class="text-danger">{{ query }}</span></h3>
+          </div>
             {% endif %}
             {% if allPosts|length >= 1 %}
         <h3 class="text-white">Search results for: <span class="text-danger">{{ query }}</span></h3>
         <div class="row mb-2">
           {% for post in allPosts %}
-            <div class="col-md-6">
-              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col-6 mt-2">
+            <div class="col-md-12 pt-3 p-1 px-3 rounded bg-dark shadow" style="
+            background: url({{post.thumbnail.url}});
+            background-position: center;
+            background-blend-mode: overlay;
+            background-size: cover;
+        ">
+              <div class="row g-0 rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                  <strong class="d-inline-block mb-2 text-primary-emphasis">{{post.category}}</strong>
-                  <h3 class="mb-0">{{post.title}}</h3>
+                  <strong class="d-inline-block mb-2 blog-category-home text-primary-emphasis">{{post.category}}</strong>
+                  <h3 class="mb-0 text-white">{{post.title}}</h3>
                   <div class="mb-1 text-body-secondary">{{post.timeStamp}} UTC</div>
-                  <p class="card-text mb-auto">{{post.content|truncatechars:150}}</p>
-                  <a href="blog/{{post.slug}}" class="icon-link gap-1 icon-link-hover stretched-link">
+                  <p class="card-text mb-auto">{{post.content|truncatechars:120|safe}}</p>
+                  <a href="{{post.slug}}" class="icon-link gap-1 icon-link-hover stretched-link">
                     Continue reading
-                    <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+                    <i class="fa-solid fa-chevron-right"></i>
                   </a>
+                  <p class="postViews"> <span id="viewsCount" class="viewsCount"><strong>{{post.views}}</strong></span> views</p>
                 </div>
-                <div class="col-auto d-none d-lg-block">
-                  <div class="thumbnail-wrapper">
-                  <img src="{{post.thumbnail.url}}" width="200" height="250" alt="">
-                </div>
-              </div>
               </div>
             </div>
+          </div>
             {% endfor %}
           </div>
           {% endif %}

@@ -44,7 +44,7 @@
               <img src="{% static 'media/img/user.png' %}" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small shadow" style="">
-              <li><a class="dropdown-item text-primary" href="#">@{{request.user}}</a></li>
+              <li><p class="dropdown-item text-primary">@{{request.user}}</p></li>
               <li><a class="dropdown-item" href="#">New project...</a></li>
               <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
@@ -213,7 +213,20 @@
     </main>
     
     {% endblock body %}
-
+    <footer class=" container d-flex flex-wrap justify-content-between align-items-baseline py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+          <img src="{%static 'media/img/logo.png'%}" width="69" alt="">
+        </a>
+      </div>
+  
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="mailto:aviralale@gmail.com"><i class="fa-regular fa-envelope"></i></a></li>
+        <li class="ms-3"><a class="text-muted" href="https://www.linkedin.com/in/aviral-ale/"><i class="fa-brands fa-linkedin"></i></a></li>
+        <li class="ms-3"><a class="text-muted" href="https://instagram.com/aviral.who_"><i class="fa-brands fa-instagram"></i></a></li>
+        <li class="ms-3"><a class="text-muted" href="https://github.com/dedyspooky"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+    </footer>
     
 
     

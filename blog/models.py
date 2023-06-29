@@ -11,7 +11,7 @@ class Post(models.Model):
 
     CATEGORY_CHOICES = (
         ('world', 'World'),
-        ('us', 'U.S.'),
+        ('miscellaneous', 'Miscellaneous'),
         ('technology', 'Technology'),
         ('design', 'Design'),
         ('culture', 'Culture'),
@@ -19,7 +19,7 @@ class Post(models.Model):
         ('politics', 'Politics'),
         ('opinion', 'Opinion'),
         ('science', 'Science'),
-        ('health', 'Health'),
+        ('programming', 'Programming'),
         ('style', 'Style'),
         ('travel', 'Travel'),
     )

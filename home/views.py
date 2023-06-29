@@ -47,7 +47,8 @@ def blogSearch(request):
         allPostsTitle = Post.objects.filter(title__icontains=query)
         allPostsContent = Post.objects.filter(content__icontains=query)
         allPostsAuthor = Post.objects.filter(author__icontains=query)
-        allPosts = allPostsTitle.union(allPostsContent,allPostsAuthor)
+        allPostsCategory = Post.objects.filter(category__icontains=query)
+        allPosts = allPostsTitle.union(allPostsContent,allPostsAuthor,allPostsCategory)
     params = {'allPosts':allPosts,'query': query}
     return render(request,'blog/blogsearch.html',params)
 

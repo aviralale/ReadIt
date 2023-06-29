@@ -14,7 +14,6 @@
     <div class="nav-scroller py-1 px-4 mb-3 border-bottom">
       <nav class="nav nav-underline justify-content-between">
         <a class="nav-item nav-link link-body-emphasis {% if category == 'World' %}active{% endif %}" href="{% url 'blog:category_world' %}">World</a>
-        <a class="nav-item nav-link link-body-emphasis {% if category == 'U.S.' %}active{% endif %}" href="{% url 'blog:category_us' %}">U.S.</a>
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Technology' %}active{% endif %}" href="{% url 'blog:category_technology' %}">Technology</a>
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Design' %}active{% endif %}" href="{% url 'blog:category_design' %}">Design</a>
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Culture' %}active{% endif %}" href="{% url 'blog:category_culture' %}">Culture</a>
@@ -22,9 +21,10 @@
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Politics' %}active{% endif %}" href="{% url 'blog:category_politics' %}">Politics</a>
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Opinion' %}active{% endif %}" href="{% url 'blog:category_opinion' %}">Opinion</a>
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Science' %}active{% endif %}" href="{% url 'blog:category_science' %}">Science</a>
-        <a class="nav-item nav-link link-body-emphasis {% if category == 'Health' %}active{% endif %}" href="{% url 'blog:category_health' %}">Health</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Health' %}active{% endif %}" href="{% url 'blog:category_programming' %}">Programming</a>
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Style' %}active{% endif %}" href="{% url 'blog:category_style' %}">Style</a>
         <a class="nav-item nav-link link-body-emphasis {% if category == 'Travel' %}active{% endif %}" href="{% url 'blog:category_travel' %}">Travel</a>
+        <a class="nav-item nav-link link-body-emphasis {% if category == 'Miscellaneous' %}active{% endif %}" href="{% url 'blog:category_miscellaneous' %}">Miscellaneous</a>
       </nav>
     </div>
   {% endblock secondNav %}

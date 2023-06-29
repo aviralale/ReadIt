@@ -42,11 +42,11 @@
 <div class="b-example-divider"></div>
 
 <div class="container col-xxl-8 px-4 py-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5 rounded">
     <div class="col-10 col-sm-8 col-lg-6">
       <img
         src="https://images.unsplash.com/photo-1571401835393-8c5f35328320?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
-        class="d-block mx-lg-auto img-grayscale img-fluid"
+        class="d-block mx-lg-auto img-grayscale img-fluid rounded"
         alt="Bootstrap Themes"
         width="700"
         height="500"
@@ -76,7 +76,7 @@
   <div
     class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg"
   >
-  <div class="col-lg-4 m-2 offset-lg-1 p-0 overflow-hidden shadow-lg">
+  <div class="col-lg-4 m-2 offset-lg-1 pb-2 rounded overflow-hidden shadow">
     <img
       class="rounded-lg-3 img-grayscale"
       src="https://images.unsplash.com/photo-1530819568329-97653eafbbfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1465&q=80"
@@ -160,7 +160,7 @@
         Start exploring the captivating world of ReadIt today and let your curiosity be rewarded with exceptional content, meaningful connections, and endless inspiration. Happy reading!
       </p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <a href="/contact"></a><button type="button" class="btn btn-light btn-lg px-4 me-sm-3 fw-bold">
+        <a href="/contact"><button type="button" class="btn btn-light btn-lg px-4 me-sm-3 fw-bold">
           Contact Us
         </button></a>
         <button type="button" class="btn btn-outline-light btn-lg px-4" onclick="scrollToTop()">
@@ -173,7 +173,7 @@
 
 <div class="b-example-divider mb-0"></div>
 {% endblock main %} {% endblock body %}
-{% block script %}
+{% block js %}
 <script src="{%static "js/home.js"%}">
 </script>
-{% endblock script %}
+{% endblock js %}

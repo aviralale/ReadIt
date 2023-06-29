@@ -3,15 +3,28 @@ from django.http import HttpResponse,HttpResponseBadRequest
 from blog.models import Post,blogComment
 from django.contrib import messages
 from blog.templatetags import get_dict
+from django.urls import reverse
+from django.db.models import Count,F,DateTimeField,Q
 
 # Create your views here.
 def blogHome(request):
     # order_by('-timeStamp'), the minus sign (-) is used as a prefix to indicate descending order based on the timeStamp field.
     allPosts = Post.objects.order_by('-views')
     top_viewed_posts = Post.objects.order_by('-views')
+    recent_posts = Post.objects.order_by('-timeStamp')
+    archive_data = Post.objects.dates('timeStamp','month',order='DESC')
+    archive_links = [{
+        'year': date.year,
+        'month': date.month,
+        'link': reverse('blog:archive_posts', kwargs={'year':date.year,'month': date.month})
+        }
+        for date in archive_data
+    ]
     context ={
                 'allPosts':allPosts,
               'top_viewed_posts': top_viewed_posts,
+              'archive_links':archive_links,
+              'recent_posts':recent_posts,
               }
 
     return render(request,'blog/blogHome.html',context)
@@ -81,9 +94,9 @@ def category_world(request):
     posts = Post.objects.filter(category='world')
     return render(request, 'blog/blogCategory.html', {'category': 'World', 'posts': posts})
 
-def category_us(request):
-    posts = Post.objects.filter(category='us')
-    return render(request, 'blog/blogCategory.html', {'category': 'U.S.', 'posts': posts})
+def category_miscellaneous(request):
+    posts = Post.objects.filter(category='miscellaneous')
+    return render(request, 'blog/blogCategory.html', {'category': 'Miscellaneous', 'posts': posts})
 
 def category_technology(request):
     posts = Post.objects.filter(category='technology')
@@ -113,9 +126,9 @@ def category_science(request):
     posts = Post.objects.filter(category='science')
     return render(request, 'blog/blogCategory.html', {'category': 'Science', 'posts': posts})
 
-def category_health(request):
-    posts = Post.objects.filter(category='health')
-    return render(request, 'blog/blogCategory.html', {'category': 'Health', 'posts': posts})
+def category_programming(request):
+    posts = Post.objects.filter(category='programming')
+    return render(request, 'blog/blogCategory.html', {'category': 'Programming', 'posts': posts})
 
 def category_style(request):
     posts = Post.objects.filter(category='style')
@@ -125,3 +138,13 @@ def category_travel(request):
     posts = Post.objects.filter(category='travel')
     return render(request, 'blog/blogCategory.html', {'category': 'Travel', 'posts': posts})
 
+def archive_posts(request, year, month):
+    blog_posts = Post.objects.filter(
+        Q(timeStamp__year=year) & Q(timeStamp__month=month)
+    ).order_by('-timeStamp')
+    context = {
+        'year': year,
+        'month': month,
+        'blog_posts':blog_posts
+    }
+    return render(request,'blog/blogArchive.html',context)

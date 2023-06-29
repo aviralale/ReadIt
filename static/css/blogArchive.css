@@ -1,0 +1,11 @@
+div.post-container{
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+}
+div.post-container>div{
+    background-size: cover !important;
+    transition: background-size 0.3s ease !important;
+}
+div.post-container:hover>div{
+    background-size: 110% !important;
+}

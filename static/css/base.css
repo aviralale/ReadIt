@@ -90,3 +90,11 @@ h1.heading-post{
 .login-button-nav:hover,.signup-button-nav:hover{
 color: white !important;
 }
+
+
+.text-muted{
+  transition: all 0.2s ease !important;
+}
+.text-muted:hover{
+  color: rgb(251,251,238) !important;
+}
