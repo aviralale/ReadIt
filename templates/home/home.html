@@ -18,9 +18,10 @@
   </h1>
   <div class="col-lg-6 mx-auto">
     <p class="lead mb-4 about-us-paragraph">
+      <strong>Hello <em class="text-danger">{{user.first_name}}</em>!</strong><br>
        Welcome to Read<span class="text-danger">It</span>, the ultimate
       online blog page where you can explore a diverse range of captivating
-      articles, written by talented authors from around the globe. ReadIt offers
+      articles, written by talented authors from around the globe.  Read<span class="text-danger">It</span> offers
       a seamless and user-friendly platform that caters to all your reading
       interests and keeps you engaged with thought-provoking content.
     </p>
@@ -55,7 +56,7 @@
     </div>
     <div class="col-lg-6">
       <p class="lead about-us-paragraph">
-        At ReadIt, we believe in the power of words to inspire, educate, and entertain. Our blog page is meticulously curated to provide you with a rich and varied selection of articles spanning a wide array of topics. Whether you're passionate about technology, travel, fashion, lifestyle, science, or any other subject, you'll find something to captivate your interests on ReadIt.
+        At  Read<span class="text-danger">It</span>, we believe in the power of words to inspire, educate, and entertain. Our blog page is meticulously curated to provide you with a rich and varied selection of articles spanning a wide array of topics. Whether you're passionate about technology, travel, fashion, lifestyle, science, or any other subject, you'll find something to captivate your interests on  Read<span class="text-danger">It</span>.
       </p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <a href="/about"><button type="button" class="btn btn-light btn-lg px-4 me-md-2">
@@ -89,7 +90,7 @@
         Easy-to-Use Interface
       </h1>
       <p class="lead about-us-paragraph">
-        We understand the importance of a seamless user experience. Navigating ReadIt is effortless with our intuitive and user-friendly interface. You can easily search for specific topics, explore categories, bookmark articles for later reading, and create your own personalized reading lists. We prioritize simplicity, allowing you to focus on what matters most—reading and engaging with captivating content.
+        We understand the importance of a seamless user experience. Navigating  Read<span class="text-danger">It</span> is effortless with our intuitive and user-friendly interface. You can easily search for specific topics, explore categories, bookmark articles for later reading, and create your own personalized reading lists. We prioritize simplicity, allowing you to focus on what matters most—reading and engaging with captivating content.
       </p>
     </div>
   </div>
@@ -103,7 +104,7 @@
           Interactive Features
         </h1>
         <p class="col-lg-10 fs-5 text-secondary about-us-paragraph">
-          ReadIt offers an interactive reading experience that goes beyond just text on a screen. Engage with the articles through features like comments, likes, and sharing options. You can share your thoughts and insights, connect with fellow readers, and spark meaningful discussions around the topics you're passionate about. Your active participation enriches the community and fosters a sense of belonging.
+           Read<span class="text-danger">It</span> offers an interactive reading experience that goes beyond just text on a screen. Engage with the articles through features like comments, likes, and sharing options. You can share your thoughts and insights, connect with fellow readers, and spark meaningful discussions around the topics you're passionate about. Your active participation enriches the community and fosters a sense of belonging.
         </p>
       </div>
       <div class="col-md-10 mx-auto col-lg-5">
@@ -117,6 +118,7 @@
               class="form-control"
               id="floatingInput"
               placeholder="name@example.com"
+              disabled
             />
             <label for="floatingInput">Email address</label>
           </div>
@@ -126,12 +128,14 @@
               class="form-control"
               id="floatingPassword"
               placeholder="Password"
+              disabled
             />
             <label for="floatingPassword">Password</label>
           </div>
           <div class="checkbox mb-3">
             <label>
-              <input type="checkbox" value="remember-me" /> Remember me
+              <input type="checkbox" value="remember-me" 
+              disabled/> Remember me
             </label>
           </div>
           <button class="w-100 btn btn-lg btn-outline-light" type="submit">
@@ -154,13 +158,13 @@
     <h1 class="display-5 fw-bold text-white">Stay Connected</h1>
     <div class="col-lg-6 mx-auto">
       <p class="fs-5 mb-4 about-us-paragraph">
-        ReadIt is more than just a blog page; it's a thriving community of like-minded individuals passionate about knowledge and the written word. Connect with fellow readers and authors, follow your favorite writers, and stay up-to-date with the latest trends and articles. Share your own thoughts and ideas, forge meaningful connections, and become a part of the ReadIt community.
+         Read<span class="text-danger">It</span> is more than just a blog page; it's a thriving community of like-minded individuals passionate about knowledge and the written word. Connect with fellow readers and authors, follow your favorite writers, and stay up-to-date with the latest trends and articles. Share your own thoughts and ideas, forge meaningful connections, and become a part of the  Read<span class="text-danger">It</span> community.
       </p>
       <p class="fs-5 mb-4 about-us-paragraph">
-        Start exploring the captivating world of ReadIt today and let your curiosity be rewarded with exceptional content, meaningful connections, and endless inspiration. Happy reading!
+        Start exploring the captivating world of  Read<span class="text-danger">It</span> today and let your curiosity be rewarded with exceptional content, meaningful connections, and endless inspiration. Happy reading!
       </p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <a href="/contact"><button type="button" class="btn btn-light btn-lg px-4 me-sm-3 fw-bold">
+        <a href="/contact"><button type="button" class="btn btn-light btn-lg px-4 me-sm-3">
           Contact Us
         </button></a>
         <button type="button" class="btn btn-outline-light btn-lg px-4" onclick="scrollToTop()">

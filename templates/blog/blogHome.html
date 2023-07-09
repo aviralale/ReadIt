@@ -69,7 +69,7 @@ Blog
                 <div class="col p-4 d-flex flex-column position-static">
                   <strong class="d-inline-block mb-2 blog-category-home text-primary-emphasis">{{top_post.category}}</strong>
                   <h3 class="mb-0 text-white">{{top_post.title}}</h3>
-                  <div class="mb-1 text-body-secondary">{{top_post.timeStamp}} UTC</div>
+                  <div class="mb-1 text-body-secondary">{{top_post.timeStamp}} Asia/Kathmandu</div>
                   <p class="card-text mb-auto">{{top_post.content|truncatechars:120|safe}}</p>
                   <a href="{{top_post.slug}}" class="icon-link gap-1 icon-link-hover stretched-link">
                     Continue reading
@@ -99,7 +99,7 @@ Blog
                         <div class="col p-4 d-flex flex-column position-static">
                           <strong class="d-inline-block mb-2 blog-category-home text-primary-emphasis">{{top_post.category}}</strong>
                           <h3 class="mb-0 text-white">{{top_post.title}}</h3>
-                          <div class="mb-1 text-body-secondary">{{top_post.timeStamp}} UTC</div>
+                          <div class="mb-1 text-body-secondary">{{top_post.timeStamp}} Asia/Kathmandu</div>
                           <p class="card-text mb-auto">{{top_post.content|truncatechars:150|safe}}</p>
                           <a href="{{top_post.slug}}" class="icon-link gap-1 icon-link-hover stretched-link">
                             Continue reading
@@ -112,24 +112,6 @@ Blog
                     {% endfor %}
                   </div>
                   
-      
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
               </div>
       
               <div class="col-md-4">
@@ -208,26 +190,5 @@ Blog
    {% block js %}
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var cardText = document.querySelector('.card-text');
-      var headings = cardText.querySelectorAll('h1, h2, h3, h4, h5, h6');
-
-      // Remove all headings
-      for (var i = 0; i < headings.length; i++) {
-        cardText.removeChild(headings[i]);
-      }
-
-      // Show the content from the first paragraph
-      var paragraphs = cardText.getElementsByTagName('p');
-      if (paragraphs.length > 0) {
-        for (var j = 0; j < paragraphs.length; j++) {
-          if (j === 0) {
-            paragraphs[j].style.display = 'block';
-          } else {
-            paragraphs[j].style.display = 'none';
-          }
-        }
-      }
-    });
   </script>
    {% endblock js %}

@@ -46,15 +46,16 @@
               </div>
                 
               <div class="col-lg-6 text-center text-lg-end">
-                <button type="button" class="btn btn-outline-light px-3 me-1">
+                Author handles:
+                <a href="https://www.facebook.com/aviral069"><button type="button" class="btn btn-outline-light px-3 me-1">
                   <i class="fab fa-facebook-f"></i>
-                </button>
-                <button type="button" class="btn btn-outline-light px-3 me-1">
+                </button></a>
+                <a href="https://twitter.com/dedyspuky"><button type="button" class="btn btn-outline-light px-3 me-1">
                   <i class="fab fa-twitter"></i>
-                </button>
-                <button type="button" class="btn btn-outline-light px-3 me-1">
+                </button></a>
+                <a href="https://www.linkedin.com/in/aviral-ale/"><button type="button" class="btn btn-outline-light px-3 me-1">
                   <i class="fab fa-linkedin"></i>
-                </button>
+                </button></a>
                 <a href="#comment"><button type="button" class="btn btn-outline-light px-3 me-1">
                   <i class="fas fa-comments"></i>
                 </button></a>
@@ -76,15 +77,15 @@
           <section class="text-center border-top border-bottom py-4 mb-4">
             <p><strong>Share with your friends:</strong></p>
 
-            <button type="button" class="btn btn-outline-light me-1">
+            <a class="share-button" href="https://www.facebook.com/sharer/sharer.php?u=127.0.0.1:8000/blog/{{post.slug}}" target="_blank"><button type="button" class="btn btn-outline-light me-1">
               <i class="fab fa-facebook-f"></i>
-            </button>
-            <button type="button" class="btn btn-outline-light me-1">
+            </button></a>
+            <a class="share-button" href="https://twitter.com/intent/tweet?url=127.0.0.1:8000/blog/{{post.slug}}" target="_blank"><button type="button" class="btn btn-outline-light me-1">
               <i class="fab fa-twitter"></i>
-            </button>
-            <button type="button" class="btn btn-outline-light me-1">
+            </button></a>
+            <a class="share-button" href="https://www.linkedin.com/shareArticle?mini=true&url=127.0.0.1:8000/blog/{{post.slug}}" target="_blank"><button type="button" class="btn btn-outline-light me-1">
               <i class="fab fa-linkedin"></i>
-            </button>
+            </button></a>
             <a href="#comment"><button type="button" class="btn btn-outline-light me-1">
               <i class="fas fa-comments me-2"></i>Add comment
             </button></a>
@@ -113,19 +114,19 @@
           <!--Section: Author-->
 
           <!--Section: Comments-->
-          <section class="border-bottom mb-3">
+          <section class="border-bottom mb-3" id="comment">
             <p class="text-center"><strong>Comments: <span class="text-white" >{{comments.count}}</span> </strong></p>
 
             {% for comment in comments %}
             <!-- Comment -->
             <div class="row  mb-4 commentDisplaycontainer">
               <div class="col-2">
-                <img src="{%static 'media/img/user.png'%}"
+                <a href="/account/{{comment.user.username}}"><img src="{% if comment.user.profile_picture %}{{comment.user.profile_picture.url}} {% else %} {% static 'media/img/user.png' %} {% endif %}"
                   class="img-fluid shadow-1-strong rounded-5" alt="" />
               </div>
 
               <div class="col-10 commentDisplay rounded-5 border-dark-subtle">
-                <p class="mb-2"><strong class="text-white">@{{comment.user.username}}</strong> <br> <span class="text-small" id="commentTimeStamp">{{comment.timeStamp | naturaltime}}</span> </p>
+                <p class="mb-2"><strong class="text-white">@{{comment.user.username}}</strong> </a> <br> <span class="text-small" id="commentTimeStamp">{{comment.timeStamp | naturaltime}}</span> </p>
                 <p class="text-white">
                   {{comment.comment}}
                 </p>
@@ -195,7 +196,7 @@
                           {% for reply in replyDict|get_val:comment.sno %}
                   <div class="row my-4 rounded-5">
                     <div class="col-2">
-                      <img src="{%static 'media/img/user.png'%}"
+                      <img src="{% if reply.user.profile_picture %}{{reply.user.profile_picture.url}} {% else %} {% static 'media/img/user.png' %} {% endif %}"
                         class="img-fluid shadow-1-strong rounded-5" alt="" />
                     </div>
                     <div class="col-10 commentDisplaycontainer">
@@ -241,7 +242,7 @@
 
               <!-- Submit button -->
               <button type="submit" class="btn btn-outline-light btn-block mb-4">
-                Publish
+                Comment
               </button>
             </form>
             {% else %}
@@ -269,7 +270,21 @@
                   </div>
                   <hr>
             <!--Section: Ad-->
-            
+            <div class="d-flex justify-content-center text-center text-lg-end">
+              <a href="https://www.facebook.com/aviral069"><button type="button" class="btn btn-outline-light px-3 me-1">
+                <i class="fab fa-facebook-f"></i>
+              </button></a>
+              <a href="https://twitter.com/dedyspuky"><button type="button" class="btn btn-outline-light px-3 me-1">
+                <i class="fab fa-twitter"></i>
+              </button></a>
+              <a href="https://www.linkedin.com/in/aviral-ale/"><button type="button" class="btn btn-outline-light px-3 me-1">
+                <i class="fab fa-linkedin"></i>
+              </button></a>
+              <a href="https://github.com/dedyspooky"><button type="button" class="btn btn-outline-light px-3 me-1">
+                <i class="fab fa-github"></i>
+              </button></a>
+            </div>
+          </div>
             
             <!--Section: Ad-->
           </section>
@@ -285,32 +300,28 @@
   <!--Footer-->
   <footer class=" text-lg-start">
     <div class="py-4 text-center">
-      <a role="button" class="btn btn-outline-light btn-lg m-2"
-        href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank">
-        Learn Bootstrap 5
-      </a>
-      <a role="button" class="btn btn-outline-light btn-lg m-2" href="https://mdbootstrap.com/docs/standard/" target="_blank">
-        Download MDB UI KIT
-      </a>
+      <button type="button" class="btn btn-outline-light btn-lg px-4" onclick="scrollToTop()">
+        Go to top
+      </button>
     </div>
 
     <hr class="m-0" />
 
     <div class="text-center py-4 align-items-center">
-      <p>Follow MDB on social media</p>
-      <a href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" class="btn btn-outline-light m-1" role="button"
+      <p>Follow Creator on social media</p>
+      <a href="https://www.youtube.com/@spooky69" class="btn btn-outline-light m-1" role="button"
         rel="nofollow" target="_blank">
         <i class="fab fa-youtube"></i>
       </a>
-      <a href="https://www.facebook.com/mdbootstrap" class="btn btn-outline-light m-1" role="button" rel="nofollow"
+      <a href="mailto:aviralale@gmail.com" class="btn btn-outline-light m-1" role="button" rel="nofollow"
         target="_blank">
-        <i class="fab fa-facebook-f"></i>
+        <i class="fa fa-envelope" aria-hidden="true"></i>
       </a>
-      <a href="https://twitter.com/MDBootstrap" class="btn btn-outline-light m-1" role="button" rel="nofollow"
+      <a href="https://instagram.com/aviral.who_" class="btn btn-outline-light m-1" role="button" rel="nofollow"
         target="_blank">
-        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
       </a>
-      <a href="https://github.com/mdbootstrap/mdb-ui-kit" class="btn btn-outline-light m-1" role="button" rel="nofollow"
+      <a href="https://github.com/dedyspooky" class="btn btn-outline-light m-1" role="button" rel="nofollow"
         target="_blank">
         <i class="fab fa-github"></i>
       </a>
@@ -324,5 +335,7 @@
       var commentCount = document.getElementByClassName('commentDisplay').length;
       console.log("Count" + commentCount)
     </script>
+        <script src="{%static "js/home.js"%}">
+        </script>
  <script src="{%static 'js/blogPost.js'%}"></script>
     {% endblock js %}

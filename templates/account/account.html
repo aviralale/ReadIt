@@ -1,0 +1,326 @@
+{% extends 'baseHome.html' %}
+{% load static %}
+{% block css_links %}
+<link rel="stylesheet" href="{%static 'css/account.css'%}">
+{% endblock css_links %}
+
+{% block title %}
+Account
+{% endblock title %}
+
+{% block body %}
+{% block main %} 
+
+<div class="container py-5">
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class=" rounded-3 p-3 mb-4 shadow">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container-fluid d-flex flex-column align-items-center">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+            <div class="pfp rounded">
+            <img src="{{profile_user.profile_picture.url}}" alt="avatar"
+              class="img-fluid pfp-img" style="height: 100%;
+              width: 100%;
+              overflow: hidden;
+              ">
+            </div>
+            <h5 class="mt-3">{{profile_user.first_name}} {{profile_user.last_name}}</h5>
+            <p class="text-muted mb-3">@{{profile_user.username}}</p>
+            <p class="text-muted mb-1">{{profile_user.user_bio}}</p>
+            <br>
+            {% comment %} <p class="text-muted mb-4">{{profile_user.email}}</p> {% endcomment %}
+            <div class="d-flex justify-content-center mb-2">
+
+              {% if user_profile.facebook_username %}
+              <a href="https://www.facebook.com/{{ user_profile.facebook_username }}" target="_blank" class="mx-2 social_links facebook_link"><i class="fa-brands fa-facebook"></i></a>
+              {% else %}
+              {% endif %}
+              {% if user_profile.instagram_username %}
+              <a href="https://www.instagram.com/{{ user_profile.instagram_username }}" target="_blank" class="mx-2 social_links instagram_link"><i class="fa-brands fa-instagram"></i></a>
+              {% else %}
+              {% endif %}
+              {% if user_profile.linkedin_username %}
+              <a href="https://www.linkedin.com/{{ user_profile.linkedin_username }}" target="_blank" class="mx-2 social_links linkedin_link"><i class="fa-brands fa-linkedin"></i></a>
+              {% else %}
+              {% endif %}
+              {% if user_profile.github_username %}
+              <a href="https://www.github.com/{{ user_profile.github_username }}" target="_blank" class="mx-2 social_links github_link"><i class="fa-brands fa-github"></i></a>
+              {% else %}
+              {% endif %}
+              {% if user_profile.youtube_username %}
+              <a href="https://www.youtube.com/{{ user_profile.youtube_username }}" target="_blank" class="mx-2 social_links youtube_link"><i class="fa-brands fa-youtube"></i></a>
+              {% else %}
+              {% endif %}
+            </div>
+            <div class="d-flex justify-content-center mb-2">
+              {% if profile_user == current_user %}
+              <button type="button" class="btn btn-primary" id="signupBtnNav" data-bs-toggle="modal" data-bs-target="#edit_profile_Modal">Edit profile <i class="fa-solid fa-pen"></i></button>
+              {% else %}
+              <button type="button" class="btn btn-primary">Follow</button>
+              <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% comment %} <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fas fa-globe fa-lg text-warning"></i>
+                <p class="mb-0">https://mdbootstrap.com</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                <p class="mb-0">@mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+            </ul>
+          </div>
+        </div>{% endcomment %}
+      </div> 
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Full Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{profile_user.first_name}} {{profile_user.last_name}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <a href="mailto:{{profile_user.email}}"><p class="text-muted mb-0">{{profile_user.email}}</p></a>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Phone</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{profile_user.phone_number|truncatechars:5}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% comment %} <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                </p>
+                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                <div class="progress rounded mb-2" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                </p>
+                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                <div class="progress rounded mb-2" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+
+<!-- SIGNUP Modal -->
+<div class="modal fade" id="edit_profile_Modal" tabindex="-1" aria-labelledby="edit_profile_Modal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content px-3">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="edit_profile_ModalTitle">Edit profile</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3" id="edit-profile-form" enctype="multipart/form-data" method='post'>
+          {% csrf_token %}
+          <div class="col-12">
+            <div class="row">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">First name</label>
+              <input type="text" class="form-control" id="edit_profile_firstName" name="edit_profile_firstName" placeholder="" value="{{user.first_name}}">
+            </div>
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="edit_profile_lastName" name="edit_profile_lastName" placeholder="" value="{{user.last_name}}"  >
+            </div>
+          </div>
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text">@</span>
+              <input type="text" class="form-control" id="edit_profile_username" name="edit_profile_username" placeholder="username" value="{{user.username}}">
+            </div>
+            <label for="user_bio" class="form-label">User bio</label>
+            <div class="input-group has-validation">
+              <input type="text" class="form-control" id="edit_profile_user_bio" name="edit_profile_user_bio" placeholder="Write your bio here... (103 characters)" value="{{user.user_bio}}">
+            </div>
+            <div class="col-12">
+              <label for="image" class="form-label">Profile Image:</label>
+              <input type="file" class="form-control" id="edit_profile_profile_pic" name="edit_profile_profile_pic" value="{{user.profile_picture}}">
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="edit_profile_email" name="edit_profile_email" placeholder="you@example.com" value="{{user.email}}">
+          </div>
+          <div class="col-md-12">
+            <label for="phone" class="form-label">Phone No.</label>
+            <input type="tel" class="form-control" id="edit_profile_phone" name="edit_profile_phone" value="{{user.phone_number}}">
+          </div>
+          </div>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Edit social links
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse my-3" data-bs-parent="#accordionFlushExample">
+              
+                <div class="col-12 mb-3">
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="fa-brands fa-facebook mx-1"></i> &nbsp; facebook.com/</span>
+                    <input type="text" class="form-control" id="facebook_username" name="facebook_username" placeholder="aviral069" value="{{ user_profile.facebook_username }}">
+                  </div>
+                </div>
+                <div class="col-12 mb-3">
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="fa-brands fa-instagram mx-1"></i> &nbsp; instagram.com/</span>
+                    <input type="text" class="form-control" id="instagram_username" name="instagram_username" placeholder="aviral.who_" value="{{ user_profile.instagram_username }}">
+                  </div>
+                </div>
+                <div class="col-12 mb-3">
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="fa-brands fa-linkedin mx-1"></i> &nbsp; linkedin.com/</span>
+                    <input type="text" class="form-control" id="linkedin_username" name="linkedin_username" placeholder="in/aviral-ale/" value="{{ user_profile.linkedin_username }}">
+                  </div>
+                </div>
+                <div class="col-12 mb-3">
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="fa-brands fa-github mx-1"></i> &nbsp; github.com/</span>
+                    <input type="text" class="form-control" id="github_username" name="github_username" placeholder="dedyspooky" value="{{ user_profile.github_username }}">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="input-group has-validation">
+                    <span class="input-group-text"><i class="fa-brands fa-youtube mx-1"></i> &nbsp; youtube.com/</span>
+                    <input type="text" class="form-control" id="youtube_username" name="youtube_username" placeholder="@spooky69" value="{{ user_profile.youtube_username }}">
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+          <div class="modal-footer col-12">
+            <button type="submit" class="btn btn-outline-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+{% endblock main %} 
+<script>
+  $(document).ready(function() {
+    // Get the initial value of the username field
+    var initialUsername = $('#edit_profile_username').val();
+  
+    // Set the initial action URL for the form
+    var formAction = '/account/' + initialUsername + '/';
+  
+    // Set the form's action attribute
+    $('#edit-profile-form').attr('action', formAction);
+  
+    // Update the form's action when the username field changes
+    $('#edit_profile_username').on('input', function() {
+      var newUsername = $(this).val();
+      var newFormAction = '/account/' + newUsername + '/';
+      $('#edit-profile-form').attr('action', newFormAction);
+    });
+  });
+  </script>
+{% endblock body %}
+
+
+

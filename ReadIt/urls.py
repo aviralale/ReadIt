@@ -25,5 +25,6 @@ admin.site.index_title = "ReadIt Admin Panel"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('home.urls')),
-    path('blog/',include('blog.urls'))
+    path('blog/',include('blog.urls')),
+    path('account/',include('accounts.urls'))
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

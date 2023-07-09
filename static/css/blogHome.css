@@ -39,4 +39,17 @@
     font-size: 1rem !important;
   }
 
+
+
+  .grid-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* Displays 2 items per row by default */
+    gap: 10px !important; /* Adjust the gap between items as desired */
+  }
+  
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr !important; /* Displays 1 item per row when width is less than 768px */
+    }
+  }
   

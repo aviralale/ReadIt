@@ -1,0 +1,21 @@
+div.pfp{
+    overflow: hidden !important;
+    width: 30%;
+    height: 30%;
+    border-radius: 50px;
+}
+
+a.social_links{
+    color: #879198;
+    font-size: 1.1rem;;
+    transition: all 0.2s ease;
+}
+a.social_links:hover{
+    color:white;
+    transform: translateY(-0.1rem);
+}
+
+img.pfp-img{
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}

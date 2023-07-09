@@ -8,8 +8,13 @@ from django.contrib.auth import login,logout, authenticate
 from django.core.files.storage import FileSystemStorage
 import os
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 # Create your views here.
+
+
+User = get_user_model()
+
 
 # HTML TEMPS
 def home(request):
@@ -56,14 +61,16 @@ def blogSearch(request):
 def handleSignup(request):
     if request.method == "POST":
         # GET POST PARAMETERS
-        firstName = request.POST.get('firstName')
-        lastName = request.POST.get('lastName')
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-        profile_pic = request.FILES['profile_pic']
+        data = request.POST
+        firstName = data.get('firstName')
+        lastName = data.get('lastName')
+        username = data.get('username')
+        email = data.get('email')
+        phone = data.get('phone')
+        password1 = data.get('password1')
+        password2 = data.get('password2')
+        profile_pic = request.FILES.get('profile_pic')
+        user = User.objects.filter(username = username)
 
         # CHECK FOR ERRORNEOUS I/P
         #usernname inder 20 characters and over 3
@@ -81,17 +88,17 @@ def handleSignup(request):
 
 
         #Create user
-        myuser = User.objects.create_user(username,email,password1)
-        myuser.first_name = firstName
-        myuser.last_name = lastName
+        user = User.objects.create(username = username,
+                                   first_name = firstName,
+                                   last_name = lastName,
+                                        email = email,
+                                         profile_picture = profile_pic,
+                                         phone_number = phone,
+                                        password = password1,
+                                        )
+        user.set_password(password1)
 
-                # Save the profile picture
-        fs = FileSystemStorage(location='user/profile_images')
-        filename = fs.save(profile_pic.name, profile_pic)
-        profile_pic_path = os.path.join('user/profile_images', filename)
-        myuser.profile_pic = profile_pic_path
-
-        myuser.save()
+        user.save()
         messages.success(request, "Your ReadIt account has been successfully created.")
         return redirect('home')
     else:
@@ -118,4 +125,6 @@ def handleLogout(request):
         logout(request)
         messages.success(request,'successfully logged out')
         return redirect('home')
+
+
 

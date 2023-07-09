@@ -5,6 +5,15 @@ from django.contrib import messages
 from blog.templatetags import get_dict
 from django.urls import reverse
 from django.db.models import Count,F,DateTimeField,Q
+from django.contrib.auth import get_user_model
+
+# Create your views here.
+
+
+User = get_user_model()
+
+
+
 
 # Create your views here.
 def blogHome(request):

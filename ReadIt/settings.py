@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 ]
 
+EXTERNAL_APPS = [
+    'accounts',
+]
+
+INSTALLED_APPS += EXTERNAL_APPS
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -109,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -143,3 +149,6 @@ MESSAGE_TAGS = {
 MEDIA_ROOT = BASE_DIR / 'media'
 # Base url to serve media files
 MEDIA_URL = '/media/'
+
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
