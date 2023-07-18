@@ -42,7 +42,7 @@
           <div class="flex-shrink-0 dropdown">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 
-              <img src="{% if user.profile_picture %}{{user.profile_picture.url}} {% else %} {% static 'media/img/user.png' %} {% endif %}" alt="mdo" width="32" height="32" class="rounded-circle">
+              <img src="{% if user.profile_picture %}{{user.profile_picture.url}} {% else %} {% static 'media/img/user.webp' %} {% endif %}" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small shadow" style="">
               <li><p class="dropdown-item text-primary">@{{request.user}}</p></li>

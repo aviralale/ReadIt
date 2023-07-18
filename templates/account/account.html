@@ -1,11 +1,12 @@
 {% extends 'baseHome.html' %}
 {% load static %}
+{% load humanize %}
 {% block css_links %}
 <link rel="stylesheet" href="{%static 'css/account.css'%}">
 {% endblock css_links %}
 
 {% block title %}
-Account
+{{profile_user.first_name}} {{profile_user.last_name}}
 {% endblock title %}
 
 {% block body %}
@@ -17,7 +18,7 @@ Account
         <nav aria-label="breadcrumb" class=" rounded-3 p-3 mb-4 shadow">
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            <li class="breadcrumb-item active" aria-current="page">@{{profile_user.username}}</li>
           </ol>
         </nav>
       </div>
@@ -26,15 +27,19 @@ Account
     <div class="container-fluid d-flex flex-column align-items-center">
       <div class="col-lg-4">
         <div class="card mb-4">
-          <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+          <div class="card-body text-center bg-dark d-flex flex-column justify-content-center align-items-center" style="
+                    background: url({{profile_user.cover_picture.url}});
+                    background-blend-mode: overlay;
+                    background-size: cover;
+          ">
             <div class="pfp rounded">
-            <img src="{{profile_user.profile_picture.url}}" alt="avatar"
+            <img src="{% if profile_user.profile_picture %}{{profile_user.profile_picture.url}} {% else %} {% static 'media/img/user.webp' %} {% endif %}" alt="avatar"
               class="img-fluid pfp-img" style="height: 100%;
               width: 100%;
               overflow: hidden;
               ">
             </div>
-            <h5 class="mt-3">{{profile_user.first_name}} {{profile_user.last_name}}</h5>
+            <h5 class="mt-3 text-white">{{profile_user.first_name}} {{profile_user.last_name}}</h5>
             <p class="text-muted mb-3">@{{profile_user.username}}</p>
             <p class="text-muted mb-1">{{profile_user.user_bio}}</p>
             <br>
@@ -64,10 +69,10 @@ Account
             </div>
             <div class="d-flex justify-content-center mb-2">
               {% if profile_user == current_user %}
-              <button type="button" class="btn btn-primary" id="signupBtnNav" data-bs-toggle="modal" data-bs-target="#edit_profile_Modal">Edit profile <i class="fa-solid fa-pen"></i></button>
+              <button type="button" class="btn btn-outline-light" id="signupBtnNav" data-bs-toggle="modal" data-bs-target="#edit_profile_Modal">Edit profile <i class="fa-solid fa-pen"></i></button>
               {% else %}
-              <button type="button" class="btn btn-primary">Follow</button>
-              <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+              <button type="button" class="btn btn-light">Follow</button>
+              <button type="button" class="btn btn-outline-light ms-1">Message</button>
               {% endif %}
             </div>
           </div>
@@ -125,7 +130,7 @@ Account
                 <p class="mb-0">Phone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{profile_user.phone_number|truncatechars:5}}</p>
+                <p class="text-muted mb-0">{{profile_user.phone_number|slice:"0:3"}}*****{{profile_user.phone_number|slice:"-2:"}}</p>
               </div>
             </div>
           </div>
@@ -214,7 +219,7 @@ Account
       <div class="modal-body">
         <form class="row g-3" id="edit-profile-form" enctype="multipart/form-data" method='post'>
           {% csrf_token %}
-          <div class="col-12">
+          < class="col-12">
             <div class="row">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">First name</label>
@@ -238,7 +243,6 @@ Account
               <label for="image" class="form-label">Profile Image:</label>
               <input type="file" class="form-control" id="edit_profile_profile_pic" name="edit_profile_profile_pic" value="{{user.profile_picture}}">
             </div>
-          </div>
           <div class="col-12">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="edit_profile_email" name="edit_profile_email" placeholder="you@example.com" value="{{user.email}}">

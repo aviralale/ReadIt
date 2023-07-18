@@ -13,7 +13,11 @@ User = get_user_model()
 @login_required
 def account(request, username):
     user = get_object_or_404(User, username=username)
-    user_profile = UserProfile.objects.get(user=user)
+    
+    try:
+        user_profile = UserProfile.objects.get(user=user)
+    except UserProfile.DoesNotExist:
+        user_profile = UserProfile.objects.create(user=user)
 
     if request.method == 'POST':
         data = request.POST
@@ -31,14 +35,14 @@ def account(request, username):
         user.user_bio = data.get('edit_profile_user_bio')
         user.phone_number = data.get('edit_profile_phone')
 
-        profile_picture = request.FILES.get('profile_picture')
+        profile_picture = request.FILES.get('edit_profile_profile_pic')
         if profile_picture:
             # Delete existing profile picture if any
-            if user_profile.profile_picture:
-                default_storage.delete(user_profile.profile_picture.path)
+            if user.profile_picture:
+                default_storage.delete(user.profile_picture.path)
 
             # Save the new profile picture
-            user_profile.profile_picture = profile_picture
+            user.profile_picture = profile_picture
 
         user.save()
         user_profile.save()

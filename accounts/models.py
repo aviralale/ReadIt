@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=20)
     profile_picture = models.ImageField(upload_to="user/")
+    cover_picture = models.ImageField(upload_to="cover_pic/", default="user/cover_pic.webp" )
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []

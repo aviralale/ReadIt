@@ -196,13 +196,13 @@
                           {% for reply in replyDict|get_val:comment.sno %}
                   <div class="row my-4 rounded-5">
                     <div class="col-2">
-                      <img src="{% if reply.user.profile_picture %}{{reply.user.profile_picture.url}} {% else %} {% static 'media/img/user.png' %} {% endif %}"
+                      <a href="/account/{{reply.user.username}}"><img src="{% if reply.user.profile_picture %}{{reply.user.profile_picture.url}} {% else %} {% static 'media/img/user.png' %} {% endif %}"
                         class="img-fluid shadow-1-strong rounded-5" alt="" />
                     </div>
                     <div class="col-10 commentDisplaycontainer">
                     <div class="col-10 commentDisplay">
-                      <p class="my-0"><strong class="text-white">@{{reply.user.username}}</strong> <br> <span class="text-small" id="replyTimeStamp">{{reply.timeStamp | naturaltime}}</span> </p>
-                      <p class="text-white">
+                      <p class="my-0"><strong class="text-white">@{{reply.user.username}}</strong></a> <br> <span class="text-small" id="replyTimeStamp">{{reply.timeStamp | naturaltime}}</span> </p>
+                    <p class="text-white">
                     {{reply.comment}}
                       </p>
                     </div>
