@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
     {
-    "src": "devntechno/wsgi.py",
+    "src": "ReadIt/wsgi.py",
     "use": "@vercel/python",
     "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.7" }
     },
@@ -21,7 +21,7 @@
     },
     {
     "src": "/(.*)",
-    "dest": "devntechno/wsgi.py"
+    "dest": "ReadIt/wsgi.py"
     }
     ]
     }
